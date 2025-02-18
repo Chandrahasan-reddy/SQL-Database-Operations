@@ -1,0 +1,84 @@
+
+CREATE TABLE COUNTRIES
+(
+CountryID    INT,
+CountryCode CHAR(2),
+CountryName VARCHAR(20)
+);
+INSERT INTO Countries (CountryID,CountryCode,CountryName) VALUES (01 , 'IN' , 'India');
+INSERT INTO Countries (CountryCode,CountryID,CountryName) VALUES ('UK',02,'United Kingdom');
+INSERT INTO Countries (CountryID,CountryName) VALUES (03,'Uganda');
+INSERT INTO Countries (CountryID,CountryName,CountryCode) VALUES (03,'Uganda', NULL);
+SELECT * FROM Countries;
+UPDATE Countries SET CountryCode = 'USA' Where CountryID = 1;
+DELETE FROM Countries Where CountryID = 3;
+TRUNCATE TABLE Countries;
+DROP TABLE Countries;
+ALTER TABLE Countries ALTER COLUMN CountryCode CHAR(3);
+ALTER TABLE Countries ADD Latitude Decimal(7,5), Longitude Decimal(7,5);
+
+CREATE TABLE dept
+(
+deptno INT Primary Key,
+deptName VARCHAR(20),
+loc VARCHAR(20),
+);
+
+INSERT INTO dept VALUES(40,'Engineering','Kadapa');
+INSERT INTO dept VALUES(20,'Research','Riper');
+INSERT INTO dept VALUES(30,'Agriculture','Anantapur');
+INSERT INTO dept VALUES(10,'Sales','Chitoor');
+Select * from dept;
+
+CREATE TABLE emp
+(
+empno INT Primary key,
+empname VARCHAR(20),
+job VARCHAR(20),
+mgr INT,
+hiredate DATE,
+sal DECIMAL(9,2) check(sal>0),
+comm DECIMAL(7,2),
+deptno INT,
+CONSTRAINT FK_DEPTNO foreign key (deptno) references dept (deptno)
+);
+
+INSERT INTO emp VALUES (7369,'CHANDU','SOFTWARE',7902,'2025-02-14',800,NULL,20);
+INSERT INTO emp VALUES (7499,'Naresh','MEDICAL',7968,'2025-02-20',1000,300,10);
+INSERT INTO emp VALUES (7521,'ASHOK','ANALYST',76980,'2024-03-7',1200,250,30);
+INSERT INTO emp VALUES (7521,'SHARATH','ASSOCIATE',7566,'2023-07-29',2975,NULL,40);
+
+select * from emp;
+
+
+ --system defined functions--
+SELECT LOWER(empname) from EMP;
+SELECT UPPER(empname) from EMP;
+SELECT LEFT(empname,3) from EMP;
+SELECT RIGHT(empname,3) from EMP;
+SELECT empname,sal*1.1 from EMP;
+SELECt empname,sal*2.6 from EMP;
+SELECT substring('chandrahasan',4,5);
+SELECT substring('chandrahasan',4,LEN('chandrahasan'));
+SELECT floor(1.80);
+SELECT ceiling(1.80);
+SELECT Round(3.556,2);
+SELECT Round(3.512,2);
+SELECT * from emp;
+
+
+SELECT YEAR(getdate());
+SELECT MONTh(getdate());
+SELECT DATENAME(WEEKDAY, getdate());
+SELECT left(getdate(),5);
+SELECT right(getdate(),5);
+SELECT SYSDATETIME();
+SELECT CURRENT_TIMESTAMP;
+SELECT convert(VARCHAR, getdate());
+SELECT convert(date, getdate());
+
+SELECT DATENAME(year, getdate()) as "year",
+DATENAME(month,getdate()) as "month",
+datename(day,getdate()) as "day",
+DATENAME(dayofyear,getdate()) as "day of year",
+DATENAME(weekday,getdate()) as "weekday";
